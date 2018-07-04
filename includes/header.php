@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+?>
+
 <header class="header1">
 		<!-- Header desktop -->
 		<div class="container-menu-header">
