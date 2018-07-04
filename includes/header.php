@@ -76,10 +76,14 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="login.php" class="header-wrapicon1 dis-block">
-						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-					</a>
-
+					<?php if(isset($_SESSION['fname']))
+					{
+						echo '<span class="header-wrapicon1 dis-block"><small>Wellcome,&nbsp<strong>'.$_SESSION['fname'].'</strong></small></span>';
+						echo '<a href="index.php" class="header-wrapicon1 dis-block">
+						<!--<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">--><span class="linedivide1"></span>
+					</a>';
+					echo '<a href="logout.php"><strong>Logout</strong></a>';
+					?>
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2">
@@ -159,6 +163,18 @@
 							</div>
 						</div>
 					</div>
+					<?php
+					}
+					else
+					{
+						echo '
+						<span class="header-wrapicon1 dis-block"><small>Hello, <strong>Stranger</strong></small></span><span class="linedivide1"></span>
+						<a href="login.php" class="header-wrapicon1 dis-block">
+						<!--<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">--><strong>SIGN IN</strong>
+						</a>';
+						
+					}
+						?>
 				</div>
 			</div>
 		</div>

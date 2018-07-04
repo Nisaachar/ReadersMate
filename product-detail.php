@@ -88,6 +88,7 @@
 
             ?>
 
+			
 			<div class="w-size14 p-t-30 respon5">
 				<h4 class="product-detail-name m-text16 p-b-13" style="font-size:2em;">
                     <?php echo $title; ?>
@@ -98,7 +99,8 @@
 				<span class="m-text17">
 					Rs. <?php echo $price?>
 
-				</span><span class="m=text12"><em>initial payable*</em></span>
+				</span><span class="m=text12"><em>initial payable*</em></span><br>
+				<span><small class="s-text8">Free Shiping and Returns for Raipur.**</small></span>
 
 
 <br><br>
@@ -106,11 +108,11 @@
 					<small>Rent Offers*</small>
 				</span><br>
 				<div>
-				<span class="m-text12"><?php while ($row1=mysqli_fetch_array($scheme_query)) {
+				<span class="m-text12 "><?php while ($row1=mysqli_fetch_array($scheme_query)) {
 					$days = $row1[1];
 					$rate = $row1[2];
 					$new_price = ceil($price*$rate);
-					echo "<span class='m-text17'><small>Rs. ".$new_price."</small></span> for ".$days." days.<br>";
+					echo "<span class='m-text17 p-l-25'><small>Rs. ".$new_price." </small></span>  for ".$days." days<span class='s-text8'>  ".((1-$rate)*100)."% off.</span><br>";
 				} ?></span>
 			</div>
 
@@ -206,6 +208,7 @@
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
 						<p class="s-text8">
 							* while ordering initial payable amount is to be paid. Then after successfull return of the book you will recieve your remaining amount in form of credits.
+							<br>** For Shiping outside Raipur, a minimum of rs.50 Delivery Charges will be applicable on orders below rs.500.
 						</p>
 					</div>
 				</div>

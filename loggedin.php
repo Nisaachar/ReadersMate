@@ -13,9 +13,15 @@
         $ok = $run;
 
         if(mysqli_num_rows($ok)>0){
-            $_SESSION['u_id'] = $run['LID'];
-            header("Location: index.php");
-            exit();
+            $row = mysqli_fetch_array($run);
+            // Set session variables
+            $_SESSION["user_id"] = $row['LID'];
+            $_SESSION["fname"] = $row['first_name'];
+            $_SESSION["lname"] = $row['last_name'];
+           
+            
+
+            echo "<script>window.open('index.php','_self')</script>";
         }else{
             echo "not looged in!!";
             // die('Couldn t Register You' .mysql_error());
