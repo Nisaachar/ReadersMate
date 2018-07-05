@@ -1,3 +1,8 @@
+<?php 
+	include_once 'database.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('includes/head.php');?>
@@ -24,34 +29,71 @@
 							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
 							<th class="column-4 p-l-70">Quantity</th>
+							<th class="column-4 p-l-70">Remove</th>
 							<th class="column-5">Total</th>
 						</tr>
 
 						<tr class="table-row">
+							<?php 
+								$u_id = $_SESSION['user_id'];	//initializing the variables
+								$target_dir="images/books/";
+								$grand_total = 0;
+
+
+								$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' "; // Collecting data from tbl_cart
+								$run = mysqli_query($conn, $query);
+								while($row = mysqli_fetch_array($run)){ 
+
+									$book_id = $row["book_id"];
+							
+									$book_query = "SELECT * FROM tbl_book_details WHERE book_id = '$book_id' "; //fetching book
+									$book_run = mysqli_query($conn, $book_query);
+
+									while($book_row = mysqli_fetch_array($book_run)){ 
+							
+							?>
+
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="images/item-10.jpg" alt="IMG-PRODUCT">
+									<img src="<?php echo $target_dir.$book_row['img1']; ?>" alt="IMG-PRODUCT">
 								</div>
 							</td>
-							<td class="column-2">Men Tshirt</td>
-							<td class="column-3">$36.00</td>
-							<td class="column-4">
+
+							<td class="column-2"><?php echo $book_row["title"]?></td>
+
+							<td class="column-3">Rs. <?php echo $book_row["price"]?></td>
+
+							<td class="column-4 ">
 								<div class="flex-w bo5 of-hidden w-size17">
-									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-									</button>
+									<form action="amending_cart.php?book_id=<?php echo $book_row["book_id"]; ?>" class="form-inline" method = "POST" >
+										<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+											<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+										</button>
+								
+										<input class="size8 m-text18 t-center num-product" type="number" name="qty" value="<?php echo $row["qty"]; ?>">
 
-									<input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="1">
-
-									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-									</button>
+										<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+											<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+										</button>
+										<input type="submit" class="form-inline">
+									</form>
 								</div>
 							</td>
-							<td class="column-5">$36.00</td>
-						</tr>
 
-						<tr class="table-row">
+							<td class="column-5 d-flex justify-content-center align-bottom">
+								<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
+							</td>
+
+							<td class="column-6">Rs. <?php echo $price = $book_row["price"]*$row["qty"]; ?></td>
+						</tr>
+						<?php 
+								$grand_total += $price;
+								}
+							}
+						?>
+						
+						
+						<!-- <tr class="table-row">
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
 									<img src="images/item-05.jpg" alt="IMG-PRODUCT">
@@ -73,22 +115,22 @@
 								</div>
 							</td>
 							<td class="column-5">$16.00</td>
-						</tr>
+						</tr> -->
 					</table>
 				</div>
 			</div>
 
 			<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
 				<div class="flex-w flex-m w-full-sm">
-					<div class="size11 bo4 m-r-10">
+					<!-- <div class="size11 bo4 m-r-10">
 						<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">
-					</div>
+					</div> -->
 
 					<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
-						<!-- Button -->
-						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+						
+						<!-- <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
 							Apply coupon
-						</button>
+						</button> -->
 					</div>
 				</div>
 
@@ -113,7 +155,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
+						Rs. <?php echo $grand_total; ?>
 					</span>
 				</div>
 
@@ -132,14 +174,14 @@
 							Calculate Shipping
 						</span>
 
-						<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-							<select class="selection-2" name="country">
-								<option>Select a country...</option>
-								<option>US</option>
-								<option>UK</option>
-								<option>Japan</option>
-							</select>
-						</div>
+						<!-- <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
+								 <select class="selection-2" name="country">
+									<option>Select a country...</option>
+									<option>US</option>
+									<option>UK</option>
+									<option>Japan</option>
+								</select> 
+						</div> -->
 
 						<div class="size13 bo4 m-b-12">
 						<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
@@ -165,7 +207,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
+						Rs. <?php echo $grand_total; ?>
 					</span>
 				</div>
 

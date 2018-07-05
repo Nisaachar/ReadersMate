@@ -1,5 +1,6 @@
 <?php 
 	session_start();
+	include_once 'database.php';
 ?>
 
 <header class="header1">
@@ -78,7 +79,7 @@
 				<div class="header-icons">
 					<?php if(isset($_SESSION['fname']))
 					{
-						echo '<span class="header-wrapicon1 dis-block"><small>Wellcome,&nbsp<strong>'.$_SESSION['fname'].'</strong></small></span>';
+						echo '<span class="header-wrapicon1 dis-block"><small>Welcome,&nbsp<strong>'.$_SESSION['fname'].'</strong></small></span>';
 						echo '<a href="index.php" class="header-wrapicon1 dis-block">
 						<!--<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">--><span class="linedivide1"></span>
 					</a>';
@@ -93,23 +94,47 @@
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
+							<?php 
+								$u_id = $_SESSION['user_id'];	//initializing the variables
+								$target_dir="images/books/";
+								$grand_total = 0;
+
+
+								$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' "; // Collecting data from tbl_cart
+								$run = mysqli_query($conn, $query);
+								while($row = mysqli_fetch_array($run)){ 
+
+									$book_id = $row["book_id"];
+							
+									$book_query = "SELECT * FROM tbl_book_details WHERE book_id = '$book_id' "; //fetching book
+									$book_run = mysqli_query($conn, $book_query);
+
+									while($book_row = mysqli_fetch_array($book_run)){ 
+							
+							?>
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-										<img src="images/item-cart-01.jpg" alt="IMG">
+										<img src="<?php echo $target_dir.$book_row['img1'] ?>" alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
 										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
+											<?php echo $book_row["title"]; ?>
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $19.00
+											Rs. <?php  echo $book_row["price"] ?>
 										</span>
 									</div>
 								</li>
 
-								<li class="header-cart-item">
+								<?php
+										$grand_total += $book_row["price"];
+										}//for inner while_loop
+									}//for outer while loop
+								?>
+
+								<!-- <li class="header-cart-item">
 									<div class="header-cart-item-img">
 										<img src="images/item-cart-02.jpg" alt="IMG">
 									</div>
@@ -139,17 +164,17 @@
 											1 x $17.00
 										</span>
 									</div>
-								</li>
+								</li> -->
 							</ul>
 
 							<div class="header-cart-total">
-								Total: $75.00
+								Total: Rs. <?php echo $grand_total; ?>
 							</div>
 
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>

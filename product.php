@@ -130,8 +130,6 @@
 							$days = $row2['1'];
 							$rate = $row2['2'];
 
-
-							//$i = 0;
 							$howmany = mysqli_num_rows($tab_indexing);
 								?>
 						<span class="s-text8 p-t-5 p-b-5">
