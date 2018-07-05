@@ -19,7 +19,7 @@
 
 						<ul class="p-b-54">
 							<li class="p-t-4">
-								<a href="product.php?category=&offset=0&state=0" class="s-text13 active1">
+								<a href="product.php?category=&offset=0&state=0&cart_book=" class="s-text13 active1">
 									All
 								</a>
 							</li>
@@ -178,9 +178,11 @@
 
 										<div class="block2-btn-addcart w-size1 trans-0-4">
 											<!-- Button -->
-											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-												Add to Cart
-											</button>
+											<a href="addtocart.php?category=<?php echo $selector ?>&offset=<?php echo $offset; ?>&state=0&cart_book=<?php echo $_SESSION['user_id'];?>&book_id=<?php echo $row["book_id"]; ?> ">
+												<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+													Add to Cart
+												</button>
+											</a>
 										</div>
 									</div>
 								</div>

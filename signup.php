@@ -47,7 +47,7 @@
                     <div class="form-group">
 
                         <div class="input-group bo4 size15 mb-40">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" class="form-control" placeholder="Phone No." name="phone_no" required>
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" class="form-control" placeholder="Phone No." name="phone_no" required maxlength="10" minlength="10">
                         </div>
                     </div>
                     <div class="form-group">

@@ -7,9 +7,13 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $cnf_password = $_POST['cnf_password'];
-        
 
-        if(mysqli_num_rows($email) > 0){
+        $query = "SELECT * FROM tbl_login WHERE email = '$email' ";
+        $run = mysqli_query($conn, $query);
+
+        $ok = $run;
+
+        if(mysqli_num_rows($ok)>0){
             die('That Email already Exist !!');
         }else{
 
@@ -18,7 +22,7 @@
             $rs = mysqli_query($conn, $query);
 
             if($rs){
-                echo"DATA SAVED SUCCESSFULLY!!";
+                header("Location: login.php");
 
             }else{
                 die('Couldn\'t Register You' .mysql_error());
