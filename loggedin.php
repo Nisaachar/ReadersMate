@@ -18,6 +18,9 @@
             $_SESSION["user_id"] = $row['LID'];
             $_SESSION["fname"] = $row['first_name'];
             $_SESSION["lname"] = $row['last_name'];
+            $_SESSION["shipping_charges"] = 0;
+            $_SESSION["pin_no"] = '';
+
            
             
 

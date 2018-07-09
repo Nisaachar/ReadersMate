@@ -28,7 +28,7 @@
 							<th class="column-1"></th>
 							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
-							<th class="column-4 p-l-70">Quantity</th>
+							<th class="column-4 p-l-70">Avl Schemes</th>
 							<th class="column-4 p-l-70">Remove</th>
 							<th class="column-5">Total</th>
 						</tr>
@@ -38,6 +38,8 @@
 								$u_id = $_SESSION['user_id'];	//initializing the variables
 								$target_dir="images/books/";
 								$grand_total = 0;
+								
+								
 
 
 								$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' "; // Collecting data from tbl_cart
@@ -64,21 +66,22 @@
 							<td class="column-3">Rs. <?php echo $book_row["price"]?></td>
 
 							<td class="column-4 ">
-								<div class="flex-w bo5 of-hidden w-size17">
-									<form action="amending_cart.php?book_id=<?php echo $book_row["book_id"]; ?>" class="form-inline" method = "POST" >
-										<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-											<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-										</button>
-								
-										<input class="size8 m-text18 t-center num-product" type="number" name="qty" value="<?php echo $row["qty"]; ?>">
-
-										<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-											<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-										</button>
-										<input type="submit" class="form-inline">
-									</form>
+								<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
+									<select class="selection-2" name="offers">
+										<option>Choose Your Offer...</option>
+										<option>Buy New</option>
+										<option>Rent For 10 Days @ 10% Of cost</option>
+										<option>Rent For 30 Days @ 40% Of cost</option>
+										<option>Rent For 60 Days @ 50% Of cost</option>
+										<option>Rent For 90 Days @ 60% Of cost</option>
+										<option>Rent For 180 Days @ 70% Of cost</option>
+										<option>Rent For 360 Days @ 80% Of cost</option>
+									</select> 
 								</div>
 							</td>
+							
+							
+							
 
 							<td class="column-5 d-flex justify-content-center align-bottom">
 								<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
@@ -182,21 +185,23 @@
 									<option>Japan</option>
 								</select> 
 						</div> -->
-
-						<div class="size13 bo4 m-b-12">
+						<!-- <div class="size13 bo4 m-b-12">
 						<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
-						</div>
+						</div> -->
 
-						<div class="size13 bo4 m-b-22">
-							<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">
-						</div>
+						<form action="shipping.php" method="POST">
+							<div class="size13 bo4 m-b-22">
+								<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="pincode" placeholder="<?php if($_SESSION["pin_no"]==''){echo "Pincode" ;}else{echo $_SESSION["pin_no"];}  ?>">
+							</div>
 
-						<div class="size14 trans-0-4 m-b-10">
-							<!-- Button -->
-							<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-								Update Totals
-							</button>
-						</div>
+							<div class="size14 trans-0-4 m-b-10">
+								<!-- Button -->
+								<input type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" value="Update Totals">
+								<!-- <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+									Update Totals
+								</button> -->
+							</div>
+						</form>
 					</div>
 				</div>
 
@@ -207,7 +212,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						Rs. <?php echo $grand_total; ?>
+						Rs. <?php echo ($grand_total + $_SESSION['shipping_charges']); ?>
 					</span>
 				</div>
 

@@ -89,16 +89,29 @@
 
 					<div class="header-wrapicon2">
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+						<?php 
+							$u_id = $_SESSION['user_id'];	//initializing the variables
+						
+							$total_books = 0;	
+							$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' ";
+							$run = mysqli_query($conn, $query);
+							while($row = mysqli_fetch_array($run)){ //Just for the Number Of items in the cart.
+								$book_id = $row["book_id"];
+								$book_query = "SELECT * FROM tbl_book_details WHERE book_id = '$book_id' ";
+								$book_run = mysqli_query($conn, $book_query);
+								while($book_row = mysqli_fetch_array($book_run)){ 
+									$total_books++;
+								}
+							}
+						?>
+						<span class="header-icons-noti"><?php echo $total_books; ?></span>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
 							<?php 
-								$u_id = $_SESSION['user_id'];	//initializing the variables
 								$target_dir="images/books/";
 								$grand_total = 0;
-
 
 								$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' "; // Collecting data from tbl_cart
 								$run = mysqli_query($conn, $query);
