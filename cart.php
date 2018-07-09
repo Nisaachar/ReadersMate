@@ -70,12 +70,12 @@
 									<select class="selection-2" name="offers">
 										<option>Choose Your Offer...</option>
 										<option>Buy New</option>
-										<option>Rent For 10 Days @ 10% Of cost</option>
-										<option>Rent For 30 Days @ 40% Of cost</option>
-										<option>Rent For 60 Days @ 50% Of cost</option>
-										<option>Rent For 90 Days @ 60% Of cost</option>
-										<option>Rent For 180 Days @ 70% Of cost</option>
-										<option>Rent For 360 Days @ 80% Of cost</option>
+										<option value="10">Rent For 10 Days @ 10% Of cost</option>
+										<option value="40">Rent For 30 Days @ 40% Of cost</option>
+										<option value="50">Rent For 60 Days @ 50% Of cost</option>
+										<option value="60">Rent For 90 Days @ 60% Of cost</option>
+										<option value="70">Rent For 180 Days @ 70% Of cost</option>
+										<option value="80">Rent For 360 Days @ 80% Of cost</option>
 									</select> 
 								</div>
 							</td>
@@ -87,7 +87,7 @@
 								<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
 							</td>
 
-							<td class="column-6">Rs. <?php echo $price = $book_row["price"]*$row["qty"]; ?></td>
+							<td class="column-6">Rs. <?php echo $price = $book_row["price"]; ?></td>
 						</tr>
 						<?php 
 								$grand_total += $price;
