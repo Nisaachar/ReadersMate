@@ -1,6 +1,6 @@
 <?php 
 	include_once 'database.php';
-
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +28,10 @@
 							<th class="column-1"></th>
 							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
-							<th class="column-4 p-l-70">Avl Schemes</th>
-							<th class="column-4 p-l-70">Remove</th>
-							<th class="column-5">Total</th>
+							<th class="flex-c-m column-4">Avl Schemes</th>
+							<th class="column-3">Total</th>
+							<th class="column-3"></th>
+							
 						</tr>
 
 						<tr class="table-row">
@@ -44,9 +45,14 @@
 
 								$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' "; // Collecting data from tbl_cart
 								$run = mysqli_query($conn, $query);
+								$i=0;
 								while($row = mysqli_fetch_array($run)){ 
 
 									$book_id = $row["book_id"];
+									$scheme_id = $row["scheme_id"];
+									$_SESSION["book_id.$i"] = $book_id;
+									
+									
 							
 									$book_query = "SELECT * FROM tbl_book_details WHERE book_id = '$book_id' "; //fetching book
 									$book_run = mysqli_query($conn, $book_query);
@@ -65,9 +71,10 @@
 
 							<td class="column-3">Rs. <?php echo $book_row["price"]?></td>
 
-							<td class="column-4 ">
+							<td class="column-4">
+								<form id='update_cart' action="update_cart.php?book_id=<?php echo $book_id?>" method='post'>
 								<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-									<select class="selection-2" name="offers">
+									<!-- <select class="selection-2" name="offers">
 										<option>Choose Your Offer...</option>
 										<option>Buy New</option>
 										<option>Rent For 10 Days @ 10% Of cost</option>
@@ -75,25 +82,53 @@
 										<option>Rent For 60 Days @ 50% Of cost</option>
 										<option>Rent For 90 Days @ 60% Of cost</option>
 										<option>Rent For 180 Days @ 70% Of cost</option>
-										<option>Rent For 360 Days @ 80% Of cost</option>
-									</select> 
+										<option>Rent For 360 Days @ 80% Of cost</option> -->
+										<?php
+											
+											$query_scheme = "SELECT * FROM tbl_scheme ";
+											$result_scheme = mysqli_query($conn,$query_scheme);
+											echo '<select class="selection-2" name="scheme_id"';
+											while ($row_scheme = mysqli_fetch_assoc($result_scheme)){
+												echo '<option value="'.$row_scheme['scheme_id'].'"';
+												if ($scheme_id == $row_scheme['scheme_id']) echo ' selected'; // pre-select if $artID is the current artID
+												echo '>'.$row_scheme['text'].'</option>';
+											}
+											echo '</select>';
+										?>
+										
 								</div>
+								<div class="flex-c-m">
+									<button class="flex-c-m w-size6 bg1 bo-rad-23 hov1 s-text1 trans-0-4 " type="submit" name="update_cart" form="update_cart">
+						Apply
+						</button>
+										</div>
+								
+							</form>
+							
+										
 							</td>
 							
 							
 							
 
-							<td class="column-5 d-flex justify-content-center align-bottom">
-								<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
-							</td>
+							
 
-							<td class="column-6">Rs. <?php echo $price = $book_row["price"]*$row["qty"]; ?></td>
-						</tr>
+							<td class="column-3">Rs. <?php echo $price = $book_row["price"]; ?></td>
+						
 						<?php 
 								$grand_total += $price;
-								}
-							}
+								
 						?>
+						<td class="column-5 align-middle">
+								<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
+							</td>
+							</tr>
+							<?php 
+							}
+							$i++;
+							}
+							?>
+							
 						
 						
 						<!-- <tr class="table-row">
@@ -139,9 +174,9 @@
 
 				<div class="size10 trans-0-4 m-t-10 m-b-10">
 					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" name="update_cart" form="update_cart">
 						Update Cart
-					</button>
+						</button>
 				</div>
 			</div>
 
