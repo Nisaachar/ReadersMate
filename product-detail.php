@@ -68,25 +68,19 @@
 
 						<div class="item-slick3" data-thumb="<?php echo $target_dir.$img2; ?>">
 							<div class="wrap-pic-w">
-								<img  src="<?php echo $target_dir.$img2; ?>" >
+								<img src="<?php echo $target_dir.$img2; ?>" >
 							</div>
 						</div>
 
-						<div class="item-slick3" data-thumb="<?php echo $target_dir.$img3; ?>">
+						<div class="item-slick3" data-thumb="<?php echo $target_dir.$img3; ?> ">
 							<div class="wrap-pic-w">
-								<img  src="<?php echo $target_dir.$img3; ?>" >
+								<img src="<?php echo $target_dir.$img3; ?>" >
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 
-
-            <?php
-
-
-            ?>
 
 			
 			<div class="w-size14 p-t-30 respon5">
@@ -141,8 +135,8 @@
 						<div class="s-text15 w-size15 t-center">
 							Color
 						</div>
-
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
+					-->
+						<!-- <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
 							<select class="selection-2" name="color">
 								<option>Choose an option</option>
 								<option>Gray</option>
@@ -152,7 +146,20 @@
 							</select>
 						</div>
 					</div> -->
-
+					<form action="addtocart.php?&book_id=<?php echo $book_id; ?>" id="schemes">
+						<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden m-t-8 m-b-12 w-size16">
+										<select class="selection-2" name="offers" style = "font-size: 1.25em; ">
+											<option value="0">Choose Your Offer...</option>
+											<option value="0">Buy New</option>
+											<option value="1">Rent For 10 Days @ 10% Of cost</option>
+											<option value="4">Rent For 30 Days @ 40% Of cost</option>
+											<option value="5">Rent For 60 Days @ 50% Of cost</option>
+											<option value="6">Rent For 90 Days @ 60% Of cost</option>
+											<option value="7">Rent For 180 Days @ 70% Of cost</option>
+											<option value="8">Rent For 360 Days @ 80% Of cost</option>
+										</select> 
+						</div>
+					</form>
 					<div class="flex-r-m flex-w p-t-10">
 						<div class="w-size16 flex-m flex-w">
 							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
@@ -169,9 +176,10 @@
 
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
 								<!-- Button -->
-								<span><button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" style="margin-left: -68%">
-									Rent
-								</button>
+								<span>
+								
+								<input form="schemes" type="submit" Value="Rent Now" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" style="margin-left: -68%"	>
+											
 								</span>
 							</div>
 						</div>
@@ -222,7 +230,7 @@
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
 						<p class="s-text8">
-							Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+							No Reviews Till Now.
 						</p>
 					</div>
 				</div>
@@ -265,9 +273,11 @@
 
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
+										<a href="addtocart.php?&book_id=<?php echo $related_row["book_id"]; ?> ">
+											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+												Add to Cart
+											</button>
+										</a>
 									</div>
 								</div>
 							</div>
