@@ -146,7 +146,7 @@
 							</select>
 						</div>
 					</div> -->
-					<form action="addtocart.php?&book_id=<?php echo $book_id; ?>" id="schemes">
+					<form action="rentnow.php?&book_id=<?php echo $book_id; ?>" id="schemes" method="POST">
 						<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden m-t-8 m-b-12 w-size16">
 										<select class="selection-2" name="offers" style = "font-size: 1.25em; ">
 											<option value="0">Choose Your Offer...</option>
