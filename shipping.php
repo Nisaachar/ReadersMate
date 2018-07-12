@@ -7,18 +7,21 @@
 
     $query = "SELECT * FROM tbl_delivery WHERE pin_code = '$pin' ";
     $run = mysqli_query($conn, $query);
-    $ok = $run;
+    $row = mysqli_fetch_array($run);
 
-    if($run){
-        $row = mysqli_fetch_array($run);
+    if($row){
 
-        $_SESSION["shipping_charges"] = $row['charges'];
+        $charges = $row['charges'];
         $locality = $row['locality'];
-        $_SESSION["pin_no"] = $pin;
-    
+
+        $data_query = "UPDATE tbl_login SET pin_code = '$pin' , delivery_charges = '$charges' , locality = '$locality' WHERE tbl_login.LID = '$u_id' " ;
+        $data_run = mysqli_query($conn, $data_query);
+        
         header("Location: cart.php");
     }else{
-        header("Location: index.php");
+        $data_query = "UPDATE tbl_login SET pin_code = 'Invalid' WHERE tbl_login.LID = '$u_id' " ;
+        $data_run = mysqli_query($conn, $data_query);
+        header("Location: cart.php");
     }
 
 ?>

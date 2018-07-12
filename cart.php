@@ -5,7 +5,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include('includes/head.php');?>
+	<head>
+	<?php include('includes/head.php');?>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+
 <body class="animsition">
 
 	<?php include('includes/header.php');?>
@@ -50,7 +56,6 @@
 									$book_id = $row["book_id"];
 									$scheme_id = $row["scheme_id"];
 									$_SESSION["book_id.$i"] = $book_id;
-
 
 
 									$book_query = "SELECT * FROM tbl_book_details WHERE book_id = '$book_id' "; //fetching book
@@ -194,9 +199,32 @@
 					</span>
 
 					<div class="w-size20 w-full-sm">
-						<p class="s-text8 p-b-23">
-							There are no shipping methods available. Please double check your address, or contact us if you need any help.
-						</p>
+						<?php 
+							$u_id = $_SESSION['user_id'];
+							$user_query = "SELECT * FROM tbl_login WHERE LID = '$u_id' ";
+							$user_run = mysqli_query($conn, $user_query);
+							$user_data =  mysqli_fetch_array($user_run);
+							if($user_data['pin_code'] == NULL){
+								echo ' <p class="s-text8 p-b-23">
+								Enter Your PinCode to know the delivery Charges.
+								</p><br/> ';
+							
+							}else if($user_data['pin_code'] == 'Invalid'){
+								echo '
+								<div class="alert alert-info alert-dismissible fade in">
+									<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+									 <strong>Sorry ! </strong> We don\'t Deliver to that Locality.
+								</div>
+								' ;
+							}
+							else{
+							
+								echo '<p class="s-text8 p-b-23"><strong> Rs. '
+								.$user_data['delivery_charges']. 
+								' ('.$user_data['locality'].') </strong></p><br/>' ;
+							}				
+						?>
+
 
 						<span class="s-text19">
 							Calculate Shipping
@@ -216,7 +244,7 @@
 
 						<form action="shipping.php" method="POST">
 							<div class="size13 bo4 m-b-22">
-								<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="pincode" placeholder="<?php if($_SESSION["pin_no"]==''){echo "Pincode" ;}else{echo $_SESSION["pin_no"];}  ?>">
+								<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="pincode" placeholder="<?php if($user_data['pin_code']){echo $user_data['pin_code'] ;}else{ echo "Pincode" ;} ?>">
 							</div>
 
 							<div class="size14 trans-0-4 m-b-10">
@@ -237,15 +265,18 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						Rs. <?php echo ($grand_total + $_SESSION['shipping_charges']); ?>
+						Rs. <?php echo ($grand_total + $user_data['delivery_charges']); ?>
 					</span>
 				</div>
 
-				<div class="size15 trans-0-4">
+				<div class="size15 trans-0-4" style = "line-height: 3.5em; ">
 					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+					<!-- <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" >
 						Proceed to Checkout
-					</button>
+					</button> -->
+					<form action="somewhere.php" method="POST">
+					<input type="submit" value = "Proceed To Checkout" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4x" <?php if($user_data['pin_code'] == NULL || $user_data['pin_code'] == 'Invalid'){ ?> disabled <?php }  ?>  />
+					</form>
 				</div>
 			</div>
 		</div>
