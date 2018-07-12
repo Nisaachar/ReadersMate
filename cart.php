@@ -1,4 +1,4 @@
-<?php 
+<?php
 	include_once 'database.php';
 	session_start();
 ?>
@@ -26,38 +26,38 @@
 					<table class="table-shopping-cart">
 						<tr class="table-head">
 							<th class="column-1"></th>
-							<th class="column-2">Product</th>
+							<th class="column-4">Product</th>
+							<th class="column-4">Avl Schemes</th>
 							<th class="column-3">Price</th>
-							<th class="flex-c-m column-4">Avl Schemes</th>
-							<th class="column-3">Initial Payable Amount **</th>
-							<th class="column-3"></th>
-							
+							<th class="column-5">Initial Payable Amount **</th>
+							<th class="column-5"></th>
+
 						</tr>
 
 						<tr class="table-row">
-							<?php 
+							<?php
 								$u_id = $_SESSION['user_id'];	//initializing the variables
 								$target_dir="images/books/";
 								$grand_total = 0;
-								
-								
+
+
 
 								$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' "; // Collecting data from tbl_cart
 								$run = mysqli_query($conn, $query);
 								$i=0;
-								while($row = mysqli_fetch_array($run)){ 
+								while($row = mysqli_fetch_array($run)){
 
 									$book_id = $row["book_id"];
 									$scheme_id = $row["scheme_id"];
 									$_SESSION["book_id.$i"] = $book_id;
-									
-									
-							
+
+
+
 									$book_query = "SELECT * FROM tbl_book_details WHERE book_id = '$book_id' "; //fetching book
 									$book_run = mysqli_query($conn, $book_query);
 
-									while($book_row = mysqli_fetch_array($book_run)){ 
-							
+									while($book_row = mysqli_fetch_array($book_run)){
+
 							?>
 
 							<td class="column-1">
@@ -66,66 +66,61 @@
 								</div>
 							</td>
 
-							<td class="column-2"><?php echo $book_row["title"]?></td>
-							<!-- Adding price -->
-							<?php 
-								$scheme_query = "SELECT * FROM tbl_scheme WHERE scheme_id = '$scheme_id' ";
-								$scheme_run = mysqli_query($conn, $scheme_query);
-								$scheme_details = mysqli_fetch_array($scheme_run);
-							?>
-							<td class="column-3">Rs. <?php echo $book_row["price"]*$scheme_details["rate"] ?></td>
+
+
+							<td class="column-4"><?php echo $book_row["title"]?></td>
 
 							<td class="column-4">
-								<form id='update_cart' action="update_cart.php?book_id=<?php echo $book_id?>" method='post'>
+								<form action="update_cart.php?book_id=<?php echo $book_id?>" method="POST">
 								<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-									<!-- <select class="selection-2" name="offers">
-										<option>Choose Your Offer...</option>
-										<option>Buy New</option>
-										<option>Rent For 10 Days @ 10% Of cost</option>
-										<option>Rent For 30 Days @ 40% Of cost</option>
-										<option>Rent For 60 Days @ 50% Of cost</option>
-										<option>Rent For 90 Days @ 60% Of cost</option>
-										<option>Rent For 180 Days @ 70% Of cost</option>
-										<option>Rent For 360 Days @ 80% Of cost</option> -->
 										<?php
-											
 											$query_scheme = "SELECT * FROM tbl_scheme ";
 											$result_scheme = mysqli_query($conn,$query_scheme);
-											echo '<select class="selection-2" name="scheme_id"';
+											echo '<select class="selection-2" name="scheme_id">';
 											while ($row_scheme = mysqli_fetch_assoc($result_scheme)){
 												echo '<option value="'.$row_scheme['scheme_id'].'"';
-												if ($scheme_id == $row_scheme['scheme_id']) echo ' selected'; // pre-select if $artID is the current artID
+												if ($row_scheme['scheme_id'] == $scheme_id ) echo ' selected'; // pre-select if $artID is the current artID
 												echo '>'.$row_scheme['text'].'</option>';
 											}
 											echo '</select>';
 										?>
-										
+
 								</div>
 								<div class="flex-c-m">
-									<button class="flex-c-m w-size6 bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" name="update_cart" form="update_cart">
+									<button class="flex-c-m w-size6 bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" name="update_cart">
 										Apply
 									</button>
-								</div>								
+								</div>
 							</form>
 							</td>
-							
+
+							<!-- Adding price -->
+							<?php
+								$scheme_query = "SELECT * FROM tbl_scheme WHERE scheme_id = '$scheme_id' ";
+								$scheme_run = mysqli_query($conn, $scheme_query);
+								$scheme_details = mysqli_fetch_array($scheme_run);
+							?>
+							<td class="column-3">Rs. <?php echo ceil($book_row["price"]*$scheme_details["rate"]) ?></td>
+
+
+
 							<td class="column-3">Rs. <?php echo $price = $book_row["price"]; ?></td>
-						
-						<?php 
-								$grand_total += $price;	
+
+						<?php
+								$grand_total += $price;
 						?>
 							<td class="column-5 align-middle">
 									<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
 							</td>
 						</tr>
-						<?php 
+						<?php
 								}
 							$i++;
 						}
 						?>
-							
-						
-						
+
+
+
 						<!-- <tr class="table-row">
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
@@ -160,7 +155,7 @@
 					</div> -->
 
 					<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
-						
+
 						<!-- <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
 							Apply coupon
 						</button> -->
@@ -213,7 +208,7 @@
 									<option>US</option>
 									<option>UK</option>
 									<option>Japan</option>
-								</select> 
+								</select>
 						</div> -->
 						<!-- <div class="size13 bo4 m-b-12">
 						<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
