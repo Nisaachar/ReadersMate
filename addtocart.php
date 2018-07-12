@@ -9,6 +9,6 @@
     $query = " INSERT INTO tbl_cart (book_id, u_id) VALUES ('$book_id' , '$u_id') ";
     $run = mysqli_query($conn, $query);
     
-     header('Location: ' .$_SERVER['HTTP_REFERER'] );
+    header('Location: ' .$_SERVER['HTTP_REFERER'] );
 ?>
 

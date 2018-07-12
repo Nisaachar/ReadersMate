@@ -152,11 +152,8 @@
 					<!-- Product -->
 					<!-- php code starts here -->
 					<div class="row">
-
-
 							<?php
-
-
+							
 							if($offset>=($howmany)){
 								echo "Sorry, There is no book in $selector section";
 							}
