@@ -18,11 +18,11 @@ if(!isset($_SESSION)) session_start(); ?>
 			</div>
 		</form> -->
 		<ul class="nav menu">
-			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/Admin/dashboard.php') echo 'active'; ?>"><a href="dashboard.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/Admin/book_view.php') echo 'active'; ?>"><a href="book_view.php"><em class="fa fa-book">&nbsp;</em> All Books</a></li>
-			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/Admin/users.php') echo 'active'; ?>"><a href="users.php"><em class="fa fa-users">&nbsp;</em> Users</a></li>
-			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/Admin/orders.php') echo 'active'; ?>"><a href="orders.php"><em class="fa fa-tasks">&nbsp;</em> Orders</a></li>
-			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/Admin/schemes.php') echo 'active'; ?>"><a href="schemes.php"><em class="fa fa-certificate">&nbsp;</em>Scheme &amp; Offers</a></li>
+			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/ReadersMate/Admin/dashboard.php') echo 'active'; ?>"><a href="dashboard.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/ReadersMate/Admin/book_view.php') echo 'active'; ?>"><a href="book_view.php"><em class="fa fa-book">&nbsp;</em> All Books</a></li>
+			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/ReadersMate/Admin/users.php') echo 'active'; ?>"><a href="users.php"><em class="fa fa-users">&nbsp;</em> Users</a></li>
+			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/ReadersMate/Admin/orders.php') echo 'active'; ?>"><a href="orders.php"><em class="fa fa-tasks">&nbsp;</em> Orders</a></li>
+			<li class="<?php if($_SERVER['PHP_SELF'] == '/RM1/ReadersMate/Admin/schemes.php') echo 'active'; ?>"><a href="schemes.php"><em class="fa fa-certificate">&nbsp;</em>Scheme &amp; Offers</a></li>
 			<!-- <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
 				<em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>

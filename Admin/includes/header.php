@@ -65,13 +65,13 @@
 				<div class="nav navbar-top-links navbar-right" style="color:white; height: 60px;
 padding: 15px 15px; ">
 					<?php
-					if($_SERVER['PHP_SELF'] == '/RM1/Admin/book_view.php')
+					if($_SERVER['PHP_SELF'] == '/RM1/ReadersMate/Admin/book_view.php')
 					{
 			    	echo '<span style="padding-right: 15px;"><a class="btn btn-primary"  href="book_register.php"><em class="fa fa-plus " style="font-size: 1em;">&nbsp;</em> New Book</a></span>';
 						echo '<span><a class="btn btn-default"  href="add_stocks.php"><em class="fa fa-plus " style="font-size: 1em;">&nbsp;</em> Add Stocks</a></span>';
 
 					}
-					if($_SERVER['PHP_SELF'] == '/RM1/Admin/schemes.php')
+					if($_SERVER['PHP_SELF'] == '/RM1/ReadersMate/Admin/schemes.php')
 					{
 
 						echo '<span><a class="btn btn-default"  href="#"><em class="fa fa-plus " style="font-size: 1em;">&nbsp;</em> Add Schemes</a></span>';

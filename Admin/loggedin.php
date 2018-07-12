@@ -25,7 +25,7 @@
 
             echo "<script>window.open('dashboard.php','_self')</script>";
         }else{
-            header('location: ../ReadersMate/Admin/sorry.php');
+            header('location: sorry.php');
             // die('Couldn t Register You' .mysql_error());
         }
     }

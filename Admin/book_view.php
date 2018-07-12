@@ -53,7 +53,7 @@ if(isset($_SESSION['admin']))
                 $run=mysqli_query($conn,$que);
                 $ok=$run;
                 $i=1;
-                $target_dir="../ReadersMate/images/books/";
+                $target_dir="../images/books/";
 
                 while($row=mysqli_fetch_array($ok))
                 {
