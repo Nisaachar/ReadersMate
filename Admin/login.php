@@ -22,7 +22,7 @@
     if(isset($_POST['password']))
     {
     $password = $_POST['password'];
-    if($password == 'Dukhhaizindagimein')
+    if($password == 'dukhhaizindagimein')
     {
         $_SESSION['admin']=1;
         echo "<script>window.open('book_view.php','_self')</script>";

@@ -2,6 +2,11 @@
 <html lang="en">
 <?php include 'head.php';?>
 <?php include 'header.php';?>
+<?php 
+session_start();
+if(isset($_SESSION['admin']))
+    {
+        ?>
 
   <body>
     
@@ -99,5 +104,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   </body>
+  <?php   }
+  else {
+    echo "<script>window.open('login.php','_self')</script>";
+  }?>
 <?php include 'footer.php';?>
 </html>
