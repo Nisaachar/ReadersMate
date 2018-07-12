@@ -10,5 +10,5 @@
     $query = " INSERT INTO tbl_cart (book_id, u_id, scheme_id) VALUES ('$book_id' , '$u_id' , '$scheme_id') ";
     $run = mysqli_query($conn, $query);
     
-    header("Location: cart.php");
+     header('Location: ' .$_SERVER['HTTP_REFERER'] );
 ?>

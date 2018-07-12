@@ -29,7 +29,7 @@
 							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
 							<th class="flex-c-m column-4">Avl Schemes</th>
-							<th class="column-3">Initial Payable Amount **</th>
+							<th class="column-3">Total</th>
 							<th class="column-3"></th>
 							
 						</tr>
@@ -41,6 +41,7 @@
 								$grand_total = 0;
 								
 								
+
 
 								$query = "SELECT * FROM tbl_cart WHERE u_id = '$u_id' "; // Collecting data from tbl_cart
 								$run = mysqli_query($conn, $query);
@@ -67,13 +68,8 @@
 							</td>
 
 							<td class="column-2"><?php echo $book_row["title"]?></td>
-							<!-- Adding price -->
-							<?php 
-								$scheme_query = "SELECT * FROM tbl_scheme WHERE scheme_id = '$scheme_id' ";
-								$scheme_run = mysqli_query($conn, $scheme_query);
-								$scheme_details = mysqli_fetch_array($scheme_run);
-							?>
-							<td class="column-3">Rs. <?php echo $book_row["price"]*$scheme_details["rate"] ?></td>
+
+							<td class="column-3">Rs. <?php echo $book_row["price"]?></td>
 
 							<td class="column-4">
 								<form id='update_cart' action="update_cart.php?book_id=<?php echo $book_id?>" method='post'>
@@ -102,27 +98,36 @@
 										
 								</div>
 								<div class="flex-c-m">
-									<button class="flex-c-m w-size6 bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" name="update_cart" form="update_cart">
-										Apply
-									</button>
-								</div>								
+									<button class="flex-c-m w-size6 bg1 bo-rad-23 hov1 s-text1 trans-0-4 " type="submit" name="update_cart" form="update_cart">
+						Apply
+						</button>
+										</div>
+								
 							</form>
+							
+										
 							</td>
 							
+							
+							
+
+							
+
 							<td class="column-3">Rs. <?php echo $price = $book_row["price"]; ?></td>
 						
 						<?php 
-								$grand_total += $price;	
+								$grand_total += $price;
+								
 						?>
-							<td class="column-5 align-middle">
-									<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
+						<td class="column-5 align-middle">
+								<a href="delete_cart.php?book_id=<?php echo $book_row["book_id"]; ?>"><i class="fs-30	fa fa-trash" aria-hidden="true"></i></a>
 							</td>
-						</tr>
-						<?php 
-								}
+							</tr>
+							<?php 
+							}
 							$i++;
-						}
-						?>
+							}
+							?>
 							
 						
 						
