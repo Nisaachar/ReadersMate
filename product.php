@@ -126,10 +126,11 @@
 							}
 
 
-							$scheme_query = mysqli_query($conn, "SELECT * FROM tbl_scheme");
+							$scheme_query = mysqli_query($conn, "SELECT * FROM tbl_scheme WHERE scheme_id=4");
 							$row2 = mysqli_fetch_array($scheme_query);
-							$days = $row2['1'];
-							$rate = $row2['2'];
+							$days = $row2['days'];
+							$rate = $row2['rate'];
+							$text = $row2['text'];
 
 							$howmany = mysqli_num_rows($tab_indexing);
 								?>

@@ -27,8 +27,8 @@
 						<tr class="table-head">
 							<th class="column-1"></th>
 							<th class="column-4">Product</th>
-							<th class="column-4">Avl Schemes</th>
-							<th class="column-3">Price</th>
+							<th class="column-4">Available Schemes</th>
+							<th class="column-3">Price After Rent</th>
 							<th class="column-5">Initial Payable Amount **</th>
 							<th class="column-5"></th>
 
@@ -72,25 +72,28 @@
 
 							<td class="column-4">
 								<form action="update_cart.php?book_id=<?php echo $book_id?>" method="POST">
-								<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-										<?php
-											$query_scheme = "SELECT * FROM tbl_scheme ";
-											$result_scheme = mysqli_query($conn,$query_scheme);
-											echo '<select class="selection-2" name="scheme_id">';
-											while ($row_scheme = mysqli_fetch_assoc($result_scheme)){
-												echo '<option value="'.$row_scheme['scheme_id'].'"';
-												if ($row_scheme['scheme_id'] == $scheme_id ) echo ' selected'; // pre-select if $artID is the current artID
-												echo '>'.$row_scheme['text'].'</option>';
-											}
-											echo '</select>';
-										?>
+								<div class="form-group">
+									<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
+											<?php
+												$query_scheme = "SELECT * FROM tbl_scheme ";
+												$result_scheme = mysqli_query($conn,$query_scheme);
+												echo '<select class="selection-2" name="scheme_id">';
+												while ($row_scheme = mysqli_fetch_assoc($result_scheme)){
+													echo '<option value="'.$row_scheme['scheme_id'].'"';
+													if ($row_scheme['scheme_id'] == $scheme_id ) echo ' selected'; // pre-select if $artID is the current artID
+													echo '>'.$row_scheme['text'].'</option>';
+												}
+												echo '</select>';
+											?>
 
+									</div>
+									<div class="flex-c-m">
+										<button class="flex-c-m w-size6 bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" name="update_cart">
+											Apply
+										</button>
+									</div>
 								</div>
-								<div class="flex-c-m">
-									<button class="flex-c-m w-size6 bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="submit" name="update_cart">
-										Apply
-									</button>
-								</div>
+
 							</form>
 							</td>
 
@@ -103,8 +106,8 @@
 							<td class="column-3">Rs. <?php echo ceil($book_row["price"]*$scheme_details["rate"]) ?></td>
 
 
-
-							<td class="column-3">Rs. <?php echo $price = $book_row["price"]; ?></td>
+							<!-- initial payable Amount -->
+							<td class="column-3"><strong>Rs. <?php echo $price = $book_row["price"]; ?></strong></td>
 
 						<?php
 								$grand_total += $price;

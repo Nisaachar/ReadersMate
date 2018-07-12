@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
-    
-</head>
-<?php session_start(); ?>
+<?php include 'includes/head.php'; ?>
 <body>
-    <div class="container">
-        <form action="login.php" method="post" class="form-group">
-            <label>Password</label>
-            <input type="password" name="password"></input>
-            <input type="submit"></input>
-        </form>
-    </div>
-    <?php 
-    if(isset($_POST['password']))
-    {
-    $password = $_POST['password'];
-    if($password == 'dukhhaizindagimein')
-    {
-        $_SESSION['admin']=1;
-        echo "<script>window.open('book_view.php','_self')</script>";
-    }
-    else {
-        echo "<script>window.open('index.php')</script>";
-    }
-}
-    ?>
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+				<div class="panel-heading">Log in</div>
+				<div class="panel-body">
+					<form role="form" action="loggedin.php" method="post">
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Password" name="password" type="password" value="">
+							</div>
+							<div class="checkbox">
+								<label>
+									<input name="remember" type="checkbox" value="Remember Me">Remember Me
+								</label>
+							</div>
+							<button type="submit" name="save">Login</button>
+					</form>
+				</div>
+			</div>
+		</div><!-- /.col-->
+	</div><!-- /.row -->
+
+
+<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

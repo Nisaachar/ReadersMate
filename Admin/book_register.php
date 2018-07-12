@@ -1,20 +1,18 @@
 <!doctype html>
 <html lang="en">
+<?php include 'includes/head.php';?>
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php
+if(!isset($_SESSION)) session_start();
+if(isset($_SESSION['admin']))
+    {
+        ?>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-        crossorigin="anonymous">
-
-    <title>Book Registration</title>
-</head>
-
-<body>
-    <div class="container"><br>
+  <body>
+    <?php include 'includes/header.php';?>
+    <?php include 'includes/sidebar.php';?>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <br>
         <div class="container text-center">
             <h1>Book Registration</h1>
         </div>
@@ -47,38 +45,34 @@
                     <option value="Educational">Educational</option>
                     <option value="Romantic">Romantic</option>
                     <option value="Miscellaneous">Miscellaneous</option>
-                    
+
                 </select>
             </div>
-            
+
                 <div class="form-group">
                     <label>Images:</label>
                     <!--<form id="form_upload" action="upload.php" method="post" enctype="multipart/form-data"></form>-->
-                        
-                        <input type="file" name="fileToUpload[]" multiple="multiple"form="book_register">
-                        
-                    
-                </div>
-                
-            
-            
-            
-            
-            <input class="btn btn-primary" type="submit" name="save" form="book_register">
-        
-    </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-        crossorigin="anonymous"></script>
+                        <input type="file" name="fileToUpload[]" multiple="multiple"form="book_register">
+
+
+                </div>
+
+
+
+
+
+            <input class="btn btn-primary" type="submit" name="save" form="book_register">
+
+    </div>
+  <?php   }
+  else {
+    header('location: login.php');
+  }?>
+<?php include 'includes/footer.php';?>
+<?php include 'includes/scripts.php';?>
+
+
 </body>
 
 </html>
-
-
-

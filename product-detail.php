@@ -82,7 +82,7 @@
 			</div>
 
 
-			
+
 			<div class="w-size14 p-t-30 respon5">
 				<h4 class="product-detail-name m-text16 p-b-13" style="font-size:2em;">
                     <?php echo $title; ?>
@@ -102,9 +102,11 @@
 					<small>Rent Offers*</small>
 				</span><br>
 				<div>
+
+
 				<span class="m-text12 "><?php while ($row1=mysqli_fetch_array($scheme_query)) {
-					$days = $row1[1];
-					$rate = $row1[2];
+					$days = $row1['days'];
+					$rate = $row1['rate'];
 					$new_price = ceil($price*$rate);
 					echo "<span class='m-text17 p-l-25'><small>Rs. ".$new_price." </small></span>  for ".$days." days<span class='s-text8'>  ".((1-$rate)*100)."% off.</span><br>";
 				} ?></span>
@@ -157,7 +159,7 @@
 											<option value="6">Rent For 90 Days @ 60% Of cost</option>
 											<option value="7">Rent For 180 Days @ 70% Of cost</option>
 											<option value="8">Rent For 360 Days @ 80% Of cost</option>
-										</select> 
+										</select>
 						</div>
 					</form>
 					<div class="flex-r-m flex-w p-t-10">
@@ -177,9 +179,9 @@
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
 								<!-- Button -->
 								<span>
-								
+
 								<input form="schemes" type="submit" Value="Rent Now" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" style="margin-left: -68%"	>
-											
+
 								</span>
 							</div>
 						</div>
@@ -251,13 +253,13 @@
 			<!-- Slide2 -->
 			<div class="wrap-slick2">
 				<div class="slick2">
-					<?php 
+					<?php
 						$related_query = mysqli_query($conn, "SELECT * FROM tbl_book_details WHERE category = '$category' AND book_id != $get_book ");
 						while($related_row = mysqli_fetch_array($related_query)){
 							$rel_title = $related_row[1];
 							$rel_price = $related_row[5];
 							$rel_img1 = $related_row[7];
-										
+
 					?>
 					<div class="item-slick2 p-l-15 p-r-15">
 						<!-- Block2 -->
@@ -287,7 +289,7 @@
 									<?php echo $rel_title ?>
 								</a>
 
-								
+
 								<span class="block2-oldprice m-text7 p-r-5" >
 										Rs. <?php echo $rel_price ?>
 								</span>
@@ -297,7 +299,7 @@
 							</div>
 						</div>
 					</div>
-					<?php 
+					<?php
 						}
 					?>
 				</div>
