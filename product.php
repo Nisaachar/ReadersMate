@@ -54,15 +54,11 @@
 							</li>
 						</ul>
 						<div class="search-product pos-relative bo4 of-hidden">
-							<form method="GET">
+							<form method="POST" action="somewhere.php">
 								<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-book" placeholder="Search Books..." id="search_book">
-								<!-- <input type="submit" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4 fs-12 fa fa-search" value="search"> -->
-								<a href="product.php?category=&offset=0&state=0&search_product=search-product">
-									<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-										<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-									</button>
-								</a>
-								<input type="submit" value = "Search" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+								<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" type="submit">
+									<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+								</button>	
 							</form>
 						</div>
 					</div>
