@@ -70,12 +70,12 @@
 						<div class="flex-w">
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
 								<select class="selection-2" name="sorting">
-										
-								<a href="sorting.php"><option>Default Sorting</option></a>
-								<a href="sorting.php"><option>Popularity</option></a>
-								<a href="sorting.php"><option>Price: low to high</option></a>
-								<a href="sorting.php"><option>Price: high to low</option>
-																		
+									<a href="#">
+										<option>Default Sorting</option>
+										<option>Popularity</option>
+										<option>Price: low to high</option>
+										<option>Price: high to low</option>
+									</a>									
 								</select>
 							</div>
 
@@ -91,86 +91,32 @@
 							</div> -->
 						</div>
 						<?php
-							$selector = NULL;
-							$selector = $_GET['category'];
-							// $search_query = $_GET['search_book'];
-							//static $offset = 0;
-							$offset = $_GET['offset'];
-
-							$limiting = 9;
-							$target_dir="images/books/";
-							$state = $_GET['state'];
-							if($state==1)
-							{
-								$offset = $offset + $limiting;
-							}
-							if($state==0)
-							{
-								$offset = $offset;
-							}
-							if($state==-1)
-							{
-								$offset = $offset - $limiting;
-							}
 							include_once 'database.php';
-							if($selector){
-								$books = mysqli_query($conn, "SELECT * FROM tbl_book_details WHERE category = '$selector' ORDER BY title LIMIT $offset, $limiting");
-								$tab_indexing = mysqli_query($conn, "SELECT * FROM tbl_book_details WHERE category = '$selector' ");
-							}else{
-								$books = mysqli_query($conn, "SELECT * FROM tbl_book_details ORDER BY title LIMIT $offset, $limiting");
-								$tab_indexing = mysqli_query($conn, "SELECT * FROM tbl_book_details ");
-							}
+                        
+                            $query = "SELECT * FROM tbl_book_details WHERE title REGEXP '' ORDER BY price";
+							$run = mysqli_query($conn, $query);
 
-							//New books
-							$new_books = mysqli_query($conn, "SELECT * FROM tbl_book_details ORDER BY id DESC LIMIT 10");
-							$new_book_variable = '';
 
 							$scheme_query = mysqli_query($conn, "SELECT * FROM tbl_scheme WHERE scheme_id=4");
 							$row2 = mysqli_fetch_array($scheme_query);
 							$days = $row2['days'];
 							$rate = $row2['rate'];
 							$text = $row2['text'];
-
-							$howmany = mysqli_num_rows($tab_indexing);
-								?>
-						<span class="s-text8 p-t-5 p-b-5">
-							<?php if($offset<=($howmany))
-							{
-								if(($offset+$limiting)>$howmany)
-								{
-									$n1 = $howmany;
-								}
-								else {
-									$n1 = $offset+$limiting;
-								}
-								echo "Showing ".($offset+1)."-".$n1." of ".($howmany);
-							}?>
-						</span>
+						?>
+						
 					</div>
 
 					<!-- Product -->
 					<!-- php code starts here -->
 					<div class="row">
-							<?php
-							
-							if($offset>=($howmany)){
-								echo "Sorry, There is no book in $selector section";
-							}
-
-                            while($row = mysqli_fetch_array($books)){
+						<?php	
+                            while($row = mysqli_fetch_array($run)){
                         ?>
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 
 							<!-- Block2 -->
 							<div class="block2">
-								<?php 
-									while($new_book_id = mysqli_fetch_array($new_books)){
-										if($row['id']==$new_book_id['id']){
-											$new_book_variable = 1;
-										}
-									}
-								?>
-								<div class="block2-img wrap-pic-w of-hidden pos-relative block2- <?php if($new_book_variable){ ?> labelnew <?php } ?>">
+								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
 									<a href='product-detail.php?book=<?php echo $row["book_id"];?>'><img src="<?php echo $target_dir.$row['img1'] ?>" ></a>
 
 									<div class="block2-overlay trans-0-4">
@@ -212,19 +158,7 @@
 
 					<!-- Pagination -->
 					<div class="pagination flex-m flex-w p-t-26">
-					<a href="product.php?offset=<?php echo 0 ?>&state=0&category=<?php echo $selector ?>" class="item-pagination flex-c-m trans-0-4">Start</a>
-					<a href="product.php?offset=<?php echo $offset; ?>&state=-1&category=<?php echo $selector ?>" class="item-pagination flex-c-m trans-0-4">prev</a>
-					<?php
-						$total_tabs = ceil($howmany / $limiting) ;
-						$i = 0;
-						while($i <= $total_tabs){
-					?>
-						<a href="product.php?offset=<?php echo $i*$limiting; ?>&state=0&category=<?php echo $selector ?>" class="item-pagination flex-c-m trans-0-4"	><?php echo $i+1; ?></a>
-					<?php
-						$i++;
-						}
-					?>
-						<a href="product.php?offset=<?php echo $offset; ?>&state=1&category=<?php echo $selector ?>" class="item-pagination flex-c-m trans-0-4">Next</a>
+					
 					</div>
 				</div>
 			</div>

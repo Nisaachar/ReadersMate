@@ -19,14 +19,22 @@
             <h4 class="m-text26 p-b-30 p-t-50">
 							Ship To, 
 			</h4>
+                <?php 
+                    session_start();
+                    include_once 'database.php';
+                    $query = "SELECT * FROM tbl_address WHERE LID = '$u_id' ";
+                    $run = mysqli_query($conn, $query);
+                    $row = mysqli_fetch_array($run);
 
+                    
+                ?>
 						<form method = "POST" action = "adding_address.php">
                         <div class="bo4  size15 m-b-40">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Name">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Name" value="<?php echo $row['name'];?>" >
                         </div>
                         
 						<div class="bo4  size15 m-b-40">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="house_no" placeholder="House No">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="house_no" placeholder="House/Flat Number">
 						</div>
 
                         <div class="bo4  size15 m-b-40">

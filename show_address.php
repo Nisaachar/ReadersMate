@@ -7,6 +7,7 @@
     <head>
         <?php include('includes/head.php'); ?>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/scrollBar.css">
         <style>
             body {
             padding-top: 1em;
@@ -24,45 +25,59 @@
 
 
     <div class="d-flex justify-content-center" style="background-image: url(images/addressBkg.jpg); background-repeat: no-repeat; background-size: 100% auto; background-position:center;">
-        <div class="col-md-3  bg3" style="height: 750px; margin: 100px 0px 100px 0px; filter: blur(0px); box-shadow: 0px 1px 15px 0px rgb(0,0,0,0.2)">
-            <h4 class="m-text26 p-b-30 p-t-50">
-							Ship To, 
-            </h4>
+        <div class="col-md-3  bg3" style="height: 450px; margin: 100px 0px 100px 0px; filter: blur(0px); box-shadow: 0px 1px 15px 0px rgb(0,0,0,0.2)">
+            
             
             <?php 
                 $u_id = $_SESSION['user_id'];
                 $query = "SELECT * FROM tbl_address WHERE LID = '$u_id' ";
                 $run = mysqli_query($conn, $query);
+                $rows = mysqli_fetch_array($run);
 
-                while($rows = mysqli_fetch_array($run)){
+                if($rows){
+
+                while($rows){
 
                 ?>
+                
+                <h4 class="m-text26 p-b-30 p-t-50">
+							Ship To, 
+                </h4>
 
                 <div class="container-fluid">
-                
-                <div class="card">
-                
-                <div class="card-body">
-                <h4 class="card-title"><?php echo $rows['name']; ?></h4>
-                <p class="card-text"><strong> <?php echo $rows['contact_no']; ?> </strong></p>
-                <p class="card-text"><?php echo $rows['house_no']; ?> , <?php echo $rows['locality']; ?></p>
-                <p class="card-text"><?php echo $rows['city']; ?></p>
+                    <div class="card">
+                        <div class="card-body">
+               
+                            <h4 class="card-title"><?php echo $rows['name']; ?></h4>
+                            <p class="card-text"><strong> <?php echo $rows['contact_no']; ?> </strong></p>
+                            <p class="card-text"><?php echo $rows['house_no']; ?> ,<?php echo $rows['colony']; ?> ,<strong> <?php echo $rows['locality']; ?></strong></p>
+                            <p class="card-text"><?php echo $rows['city']; ?></p>
+                            <div class=" pt-3">
+                                <a href="askAddress.php" class="card-link">Update</a>
+                                <a href="#" class="card-link float-right pt-3">Continue</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <a href="#" class="card-link">Next >></a>
-                <!-- <a href="#" class="card-link">Still Gone</a> -->
-                </div>
-                
-                </div>
-                
-                </div>
                 <?php
-                }
+                   }
+                } 
+                else{
+                    ?>
+                    <h4 class="m-text26 p-b-30 p-t-50">
+							Sorry There Are no addresses 
+                    </h4>
+                    <a href="askAddress.php">Add New Address</a>
+                    <?php
+                }  
             ?>
-            <div class="container-fluid">
-                  
-                <i class="fs-40 fa fa-plus float-right pt-3" aria-hidden="true"></i>
-                
-            </div> 
+
+            
+            <!-- <div class="container-fluid"> 
+                <a href="askAddress.php" class="float-right pt-3">Update</a>
+            </div>  -->
+        
         </div> 
     </div>
 

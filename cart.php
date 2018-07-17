@@ -277,7 +277,7 @@
 					<!-- <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" >
 						Proceed to Checkout
 					</button> -->
-					<form action="somewhere.php" method="POST">
+					<form action="show_address.php" method="POST">
 					<input type="submit" value = "Proceed To Checkout" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4x" <?php if($user_data['pin_code'] == NULL || $user_data['pin_code'] == 'Invalid'){ ?> disabled <?php }  ?>  />
 					</form>
 				</div>

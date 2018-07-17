@@ -19,8 +19,9 @@
         $data_run = mysqli_query($conn, $data_query);
     }else{
         // $data_query = "UPDATE tbl_address SET LID = '$u_id' , house_no = '$house_no' , locality = '$locality' , land_mark = '$land_mark', contact_no = '$contact_no', city = '$city' WHERE tbl_address.LID = '$u_id' " ;
-        $data_query = " INSERT INTO tbl_address (LID, name, house_no, locality, land_mark, contact_no, city ) VALUES ('$u_id', '$name', '$house_no' , '$locality', '$land_mark', '$contact_no', '$city') ";
+        $data_query = "INSERT INTO tbl_address (LID, name, house_no, locality, land_mark, contact_no, city ) VALUES ('$u_id', '$name', '$house_no' , '$locality', '$land_mark', '$contact_no', '$city') ";
         $data_run = mysqli_query($conn, $data_query);
     }
-    header("Location: askAddress.php")
+
+    header("Location: show_address.php")
 ?>
