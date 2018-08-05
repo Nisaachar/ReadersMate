@@ -20,7 +20,6 @@
 							Ship To, 
 			</h4>
                 <?php 
-                    session_start();
                     include_once 'database.php';
                     $query = "SELECT * FROM tbl_address WHERE LID = '$u_id' ";
                     $run = mysqli_query($conn, $query);
@@ -34,32 +33,32 @@
                         </div>
                         
 						<div class="bo4  size15 m-b-40">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="house_no" placeholder="House/Flat Number">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="house_no" placeholder="House/Flat Number" value="<?php echo $row['house_no'];?>" >
 						</div>
 
                         <div class="bo4  size15 m-b-40">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="lane" placeholder="Lane No./ Building / Colony">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="lane" placeholder="Lane No./ Building / Colony" value="<?php echo $row['colony'];?>" >
 						</div>
 
                         <div class="bo4  size15 m-b-40">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="locality" placeholder="Locality">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="locality" placeholder="Locality" value="<?php echo $row['locality'];?>" >
                         </div>
                         
                         <div class="bo4  size15 m-b-40">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="land_mark" placeholder="Land Mark">
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="land_mark" placeholder="Land Mark" value="<?php echo $row['land_mark'];?>" >
                             <small id="emailHelp" class="form-text text-muted float-right">Ex. Near Park or Temple, It Helps Us To Locate Your House</small>
                         </div>
                             
                         <div class="bo4  size15 m-b-40">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="contact_no" placeholder="Contact Number">
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="contact_no" placeholder="Contact Number" value="<?php echo $row['contact_no'];?>" >
                         </div>
 
                         <div class="bo4  size15 m-b-40">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="city" placeholder="City">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="city" placeholder="City" value="<?php echo $row['city'];?>" >
                         </div>
 
 						<div class="p-t-20">
-						    <input type="submit" name="save" value="Next" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" style="width=100%"> 
+						    <input type="submit" name="save" value="Update" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" style="width=100%"> 
                         </div>
                         </form>
         </div> 

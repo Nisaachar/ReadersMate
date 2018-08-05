@@ -164,13 +164,14 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<?php 
-									while($new_book_id = mysqli_fetch_array($new_books)){
-										if($row['id']==$new_book_id['id']){
-											$new_book_variable = 1;
-										}
-									}
+									// while($new_book_id = mysqli_fetch_array($new_books)){
+									// 	if($row['id']==$new_book_id['id']){
+									// 		$new_book_variable = 1;
+									// 	}
+									// }
+									//  if($new_book_variable){  }
 								?>
-								<div class="block2-img wrap-pic-w of-hidden pos-relative block2- <?php if($new_book_variable){ ?> labelnew <?php } ?>">
+								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
 									<a href='product-detail.php?book=<?php echo $row["book_id"];?>'><img src="<?php echo $target_dir.$row['img1'] ?>" ></a>
 
 									<div class="block2-overlay trans-0-4">

@@ -6,10 +6,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<?php include('includes/head.php');?>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<?php include('includes/head.php');?>
 	</head>
 
 <body class="animsition">
@@ -214,7 +214,7 @@
 							
 							}else if($user_data['pin_code'] == 'Invalid'){
 								echo '
-								<div class="alert alert-info alert-dismissible fade in">
+								<div class="alert alert-info alert-dismissible fade in" style="font-size: 1.36em;">
 									<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 									 <strong>Sorry ! </strong> We don\'t Deliver to that Locality.
 								</div>

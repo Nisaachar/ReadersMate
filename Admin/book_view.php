@@ -67,7 +67,7 @@ if(isset($_SESSION['admin']))
                     $img1=$row[7];
                     $img2=$row[8];
                     $img3=$row[9];
-                    $qty = $row['qty'];
+               
 
                 ?>
                 <th scope="row"><?php echo $i ?></th>
@@ -81,7 +81,7 @@ if(isset($_SESSION['admin']))
                 <td><?php echo $isbn ?></td>
                 <td><?php echo $price ?></td>
                 <td><?php echo $category ?></td>
-                <td><?php echo $qty ?></td>
+              
                 <td><a href="update.php?edit=<?php echo $book_id;?>" class="btn btn-default">Edit</a></td>
                 <td><a href="delete.php?del=<?php echo $book_id;?>" class="btn btn-danger">Delete</a></td>
                 </tr>

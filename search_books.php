@@ -92,6 +92,7 @@
 						</div>
 						<?php
 							include_once 'database.php';
+							$target_dir="images/books/";
                             $search_string = $_POST['search-book'];
                             $query = "SELECT * FROM tbl_book_details WHERE title REGEXP '$search_string' OR author REGEXP '$search_string' ORDER BY title";
 							$run = mysqli_query($conn, $query);

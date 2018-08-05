@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php include('includes/head.php'); ?>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/scrollBar.css">
+        <?php include('includes/head.php'); ?>
+        
         <style>
             body {
             padding-top: 1em;
@@ -15,7 +16,7 @@
         </style> 
     </head>
 
-<body class="animsition">
+<body class="animaition">
 
     <?php include('includes/header.php'); ?>
 
@@ -36,8 +37,6 @@
 
                 if($rows){
 
-                while($rows){
-
                 ?>
                 
                 <h4 class="m-text26 p-b-30 p-t-50">
@@ -52,16 +51,16 @@
                             <p class="card-text"><strong> <?php echo $rows['contact_no']; ?> </strong></p>
                             <p class="card-text"><?php echo $rows['house_no']; ?> ,<?php echo $rows['colony']; ?> ,<strong> <?php echo $rows['locality']; ?></strong></p>
                             <p class="card-text"><?php echo $rows['city']; ?></p>
-                            <div class=" pt-3">
-                                <a href="askAddress.php" class="card-link">Update</a>
-                                <a href="#" class="card-link float-right pt-3">Continue</a>
+                            <div class="pt-3">
+                                <a href="askAddress.php" class="card-link" style="color: #007bff">Update</a>
+                                <a href="askAddress.php" class="card-link float-right" style="color: #007bff">Continue</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <?php
-                   }
+                   
                 } 
                 else{
                     ?>
