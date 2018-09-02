@@ -5,7 +5,7 @@
         $last_name = $_POST['last_name'];
         $phone_no = $_POST['phone_no'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $cnf_password = $_POST['cnf_password'];
 
         $query = "SELECT * FROM tbl_login WHERE email = '$email' ";
